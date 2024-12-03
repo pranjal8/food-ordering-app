@@ -1,0 +1,219 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.container {
+  margin: auto;
+  width: 50%;
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid black;
+  margin: 4px;
+  padding: 4px;
+}
+.logo {
+  height: 100px;
+}
+.header > ul {
+  display: flex;
+  list-style-type: none;
+}
+.header > ul > li {
+  padding: 12px;
+  margin: 4px;
+}
+.header > ul > li > a {
+  text-decoration: none; /* Removes underline */
+  color: inherit; /* Inherits color from parent */
+}
+.header li:hover {
+  cursor: pointer;
+  background-color: #f0f0f0;
+}
+.header > ul > li > a:hover {
+  color: #007bff; /* Change text color on hover */
+}
+.header button {
+  padding: 12px;
+}
+.body-container {
+  margin: 4px;
+  padding: 4px;
+  border: 1px solid black;
+}
+.search-container {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  font-size: 14px;
+  margin: 12px 12px;
+}
+.search-container input {
+  padding: 12px;
+  width: 50%;
+}
+.search-container > button {
+  padding: 12px;
+  width: 20%;
+  margin: 0px 0px 0px 12px;
+}
+.filter {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+.filter button {
+  padding: 12px;
+  margin: 12px 12px;
+}
+.search-container > button:hover,
+.filter button:hover {
+  cursor: pointer;
+  border: 2px solid rgb(55, 35, 187);
+}
+.restaurant-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 12px 0px;
+}
+.restaurant-container a {
+  text-decoration: none;
+  color: inherit;
+}
+.restaurant-card{
+  border: 1px solid black;
+  background-color: #efefef ;
+  border-radius: 4px;
+  width: 22vw;
+  padding: 4px;
+  margin: 14px;
+  align-items: center;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+.restaurant-card:hover{
+  transform: scale3d(1.1, 1.1, 1);
+  border: 2px solid rgb(55, 35, 187);
+  border-radius: 4px;
+  cursor: pointer;
+}
+.restaurant-card img{
+  width: 100%;
+  height: 190px;
+  border-radius: 4px;
+}
+.menu-container {
+  display: flex;
+  margin: 4px 20vw;
+  padding: 4px;
+  flex-direction: column;
+}
+.block-container {
+  margin: 15px;
+  padding: 20px;
+  border: none;
+  border-bottom: 3px solid #ccc;
+  border-radius: 0 0 15px 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(to bottom, #ffffff 70%, #f2f2f2 100%);
+}
+.block-container h3 {
+  margin: 0;
+  padding-bottom: 10px;
+  font-size: 1.5em;
+  color: #333;
+  border-bottom: 1px solid #ddd; /* Adds a separator line */
+}
+.block {
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+.block p {
+  margin: 10px 0;
+  color: #555;
+  font-size: 1em;
+}
+.block p span {
+  font-weight: bold;
+  color: #333;
+}
+.menu-item-list {
+  margin: 20px;
+  font-family: Arial, sans-serif;
+}
+.menu-item-list strong {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+.menu-item-details .details strong {
+  font-size: 1em;
+  margin-bottom: 4px;
+}
+.menu-item-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+.menu-item-details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.menu-item-details .details {
+  flex: 1;
+}
+
+.menu-item-details strong {
+  font-size: 1.2em;
+  margin-bottom: 5px;
+}
+
+.menu-item-details p {
+  margin: 2px 0;
+}
+
+.menu-item-details .item-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-left: 15px;
+}
+
+.user-container{
+  display: flex;
+  flex-wrap: wrap;
+  margin: 12px 0px;
+
+}
+.user-card {
+  border: 1px solid black;
+  background-color: #efefef ;
+  border-radius: 4px;
+  width: 25vw;
+  padding: 10px;
+  margin: 14px;
+  align-items: center;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+ line-height: 1.5;
+}
+.user-card:hover {
+  transform: scale3d(1.1, 1.1, 1);
+  border: 2px solid rgb(55, 35, 187);
+  border-radius: 4px;
+  cursor: pointer;
+}
+.user-card img {
+  width: 100%;
+  height: 190px;
+  border-radius: 4px;
+}
