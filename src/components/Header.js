@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { LOGO_URL } from "../utils/constants";
+import logo from "../assets/images/logo.jpg"
 import { Link } from "react-router";
 import useOnlineStatus from "../utils/useOnlineStatus";
 
@@ -10,7 +11,7 @@ const Header = () => {
   return (
     <div className="header">
       <Link to="/">
-        <img className="logo" src={LOGO_URL} alt="logo-img" />
+        <img className="logo" src={logo} alt="logo-img" />
       </Link>{" "}
       <ul>
         <li>Online Status { onlineStatus ? "✅" : "🔴"} </li>
@@ -29,6 +30,10 @@ const Header = () => {
         <li>
           {" "}
           <Link to="/cart">Cart</Link>{" "}
+        </li>
+        <li>
+          {" "}
+          <Link to="/grocery">Grocery</Link>{" "}
         </li>
         <button
           onClick={() =>

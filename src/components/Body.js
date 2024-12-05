@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withRestaurantDiscount } from "./RestaurantCard";
 import { SWIGGY_URL } from "../utils/constants";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router";
@@ -9,6 +9,8 @@ const Body = () => {
   const [listOfRestaurant, setListOfRestaurant] = useState([]);
   const [filteredResaurant, setFilteredResaurant] = useState([]);
   const [search, setSearch] = useState("");
+
+  const RestaurantCardDiscount = withRestaurantDiscount(RestaurantCard);
 
   const handleFilterRating = () => {
     let filteredData = listOfRestaurant?.filter(
@@ -36,7 +38,7 @@ const Body = () => {
       }
       const json = await response.json();
       const restaurantList =
-        json.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+        json.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants;
 
       console.log(restaurantList);
@@ -68,8 +70,11 @@ const Body = () => {
         {filteredResaurant?.map((item) => (
           <>
             <Link to={"/restaurants/" + item?.info?.id} key={item?.info?.id}>
-              {" "}
-              <RestaurantCard resData={item} />{" "}
+              {item?.info?.aggregatedDiscountInfoV3?.header ? (
+                <RestaurantCardDiscount resData={item}/>
+              ) : (
+                <RestaurantCard resData={item} />
+              )}
             </Link>
           </>
         ))}
