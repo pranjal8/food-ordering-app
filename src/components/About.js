@@ -6,7 +6,13 @@ class About extends Component {
     super(props);
 
     this.state = {
-      userInfo: {
+      userInfo1: {
+        name: "Dummy",
+        location: "Dummy",
+        avatar_url: "Dummy",
+        bio: "Dummy",
+      },
+      userInfo2: {
         name: "Dummy",
         location: "Dummy",
         avatar_url: "Dummy",
@@ -16,18 +22,28 @@ class About extends Component {
   }
   async componentDidMount() {
     try {
-      const response = await fetch("https://api.github.com/users/pranjal8");
-      const data = await response.json();
-      this.setState({ userInfo: data });
+      const [response1, response2] = await Promise.all([
+        fetch("https://api.github.com/users/pranjal8"),
+        fetch("https://api.github.com/users/prajwalkamble369"),
+      ]);
+
+      const [data1, data2] = await Promise.all([
+        response1.json(),
+        response2.json(),
+      ]);
+
+      this.setState({ userInfo1: data1, userInfo2: data2 });
     } catch (error) {
-      console.error(error);
+      console.error("Error fetching user data:", error);
     }
   }
 
   render() {
+    const { userInfo1, userInfo2 } = this.state;
     return (
       <div>
-        <UserClass userInfo={this.state.userInfo} />
+        <UserClass userInfo={userInfo1} />
+        <UserClass userInfo={userInfo2} />
       </div>
     );
   }

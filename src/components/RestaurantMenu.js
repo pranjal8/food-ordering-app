@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { IMG_URL, MENU_URL } from "../utils/constants";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
+import RestaurantCategory from "./RestaurantCategory";
+import { useSelector } from "react-redux";
 
 const RestaurantMenu = (props) => {
   const [resDetail, setResDetail] = useState(null);
-  const [menuItem, setMenuItem] = useState([]);
   const [category, setCategory] = useState([]);
   const { restaurantId } = useParams();
-
   const [expandedIndex, setExpandedIndex] = useState(null);
 
   const toggleAccordion = (index) => {
@@ -22,10 +22,6 @@ const RestaurantMenu = (props) => {
         );
         const json = await response.json();
         setResDetail(json?.data?.cards[2]?.card?.card?.info);
-        setMenuItem(
-          json?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]
-            ?.card?.card?.itemCards
-        );
         const categoryList =
           json?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
             (c) =>
@@ -52,55 +48,61 @@ const RestaurantMenu = (props) => {
           <p>{resDetail?.sla?.deliveryTime} Minutes </p>
         </div>
       </div>
-
       <div className="menu-item-list">
         <strong>Dishes</strong>
 
         {category?.map((item, index) => (
-          <div
-            style={{ marginTop: "10px", padding: "6px" }}
-            key={item?.card?.card?.title}
-          >
+          <>
             <div
-              className={`accordion-title ${
-                expandedIndex === index ? "expanded" : ""
-              }`}
-              onClick={() => toggleAccordion(index)}
+              style={{ marginTop: "10px", padding: "6px" }}
+              key={item?.card?.card?.title}
             >
-              {item?.card?.card?.title}
-              <span>{expandedIndex === index ? "▲" : "▼"}</span>
-            </div>
+              <div
+                className={`accordion-title ${
+                  expandedIndex === index ? "expanded" : ""
+                }`}
+                onClick={() => toggleAccordion(index)}
+              >
+                {item?.card?.card?.title} ({item?.card?.card?.itemCards.length})
+                <span>{expandedIndex === index ? "▲" : "▼"}</span>
+              </div>
 
-            {expandedIndex === index && (
-              <ul>
-                {item?.card?.card?.itemCards?.map((item) => (
-                  <li className="menu-item-details" key={item?.card?.info?.id}>
-                    <div className="details">
-                      <strong>{item?.card?.info?.name} </strong>
-                      <p>Rs. {item?.card?.info?.price / 100}</p>
-                      <p>
-                        Rating:{" "}
-                        {item?.card?.info?.ratings?.aggregatedRating?.rating}{" "}
-                      </p>
-                      <p>{item?.card?.info?.description} </p>
-                    </div>
-                    <div className="add-menu">
-                      <img
-                        src={IMG_URL + item?.card?.info?.imageId}
-                        alt="Biryani"
-                        className="item-image"
-                      />
-                      <button>Add</button>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
+              {expandedIndex === index && (
+                <RestaurantCategory data={item?.card?.card?.itemCards} />
+              )}
+            </div>
+          </>
         ))}
       </div>
+      <Notification />
     </div>
   );
 };
 
 export default RestaurantMenu;
+
+const Notification = () => {
+  const cartItem = useSelector((s) => s.cart.items.length);
+  const navigate = useNavigate();
+
+  return (
+    cartItem > 0 && (
+      <div style={showCart}>
+        <p>{cartItem} Item{cartItem > 1 ? 's' : ''} Added</p>
+        <p style={{ cursor: 'pointer'}} onClick={() => navigate('/cart')}>View Cart 🛒</p>
+      </div>
+    )
+  );
+};
+
+const showCart = {
+  border: "1px solid green",
+  backgroundColor: "green",
+  padding: "12px",
+  position: "fixed",
+  color: "white",
+  display: "flex",
+  justifyContent: "space-between",
+  bottom: "0px",
+  width: "57vw",
+};

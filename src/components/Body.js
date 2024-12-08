@@ -38,7 +38,7 @@ const Body = () => {
       }
       const json = await response.json();
       const restaurantList =
-        json.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle
+        json.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants;
 
       console.log(restaurantList);
